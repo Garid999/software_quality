@@ -1,0 +1,17 @@
+BUG 1
+Test Case: Register same username twice
+Expected Result:
+System should reject duplicate username
+Status: Failed
+
+BUG 2
+Test Case: View password security
+Expected Result:
+Password should not be visible
+Status: Failed
+
+BUG 3
+Test Case: Empty username
+Expected Result:
+System should reject empty username
+Status: Failed
