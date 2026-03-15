@@ -1,10 +1,30 @@
-users = {}
-def register():
-    username = input("Enter username: ")
-    password = input("Enter password: ")
+import json
+try:
+    with open("users.json", "r") as file:
+        users = json.load(file)
+except:
+    users = {}
 
-    users[username] = password
-    print("Registration successful!")
+
+def save_users():
+    with open("users.json", "w") as file:
+        json.dump(users, file)
+
+
+def register():
+    username = input("Enter username: ").strip()
+    password = input("Enter password: ").strip()
+
+    if username == "":
+        print("Error: Username cannot be empty.")
+        return
+
+    if username in users:
+        print("Error: Username already exists.")
+    else:
+        users[username] = password
+        save_users()
+        print("Registration successful!")
 
 
 def login():
@@ -23,22 +43,12 @@ def view_users():
         print(user)
 
 
-def check_password():
-    username = input("Enter username: ")
-
-    if username in users:
-        print("Password:", users[username])
-    else:
-        print("User not found")
-
-
 while True:
 
-    print("1.Register")
-    print("2.Login")
-    print("3.View Users")
-    print("4.Check Password")
-    print("5.Exit")
+    print("\n1. Register")
+    print("2. Login")
+    print("3. View Users")
+    print("4. Exit")
 
     choice = input("Choose option: ")
 
@@ -52,9 +62,6 @@ while True:
         view_users()
 
     elif choice == "4":
-        check_password()
-
-    elif choice == "5":
         print("Goodbye")
         break
 
